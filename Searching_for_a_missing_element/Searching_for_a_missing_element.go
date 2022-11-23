@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 )
 
@@ -38,11 +39,16 @@ func main() {
 		for i := 0; i < len(array); i++ { // ввод массива с клавиатуры
 			fmt.Print("Введите " + strconv.Itoa(i) + " элемент: ")
 			fmt.Scan(&array[i])
+			if array[i] <= 0 {
+				fmt.Println("Некорректный ввод!") //если пользователь не умеет читать
+				os.Exit(0)
+			}
 		}
 
 		fmt.Println(Solution(array)) // вывод на экран недостающего элемента
 
 	} else {
 		fmt.Println("Некорректный ввод!") //если пользователь не умеет читать
+		os.Exit(0)
 	}
 }
