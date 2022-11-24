@@ -14,11 +14,9 @@ func Solution(A []int) int {
 
 	for i := 1; i <= len(A); i++ {
 		count = 0
-		fmt.Print("begin_val", i, " ")
 		for j := 0; j < len(A); j++ {
 			if A[j] == i { // если элемент есть, то смотрим следующий
 				count++
-				fmt.Println("end_val", i)
 			}
 		}
 		if count == 0 || count > 1 { // если элемента не было или он повторяется, то возвращаем значение 0
