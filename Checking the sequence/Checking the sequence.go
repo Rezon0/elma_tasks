@@ -54,5 +54,5 @@ func main() {
 
 	}
 
-	fmt.Println(Solution(array))
+	fmt.Println(Solution(array)) // проверка массива на последовательность
 }
