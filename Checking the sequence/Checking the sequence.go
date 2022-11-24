@@ -6,58 +6,55 @@ import (
 	"strconv"
 )
 
-func BubbleSort(ar []uint32) { // сортировка пузырьком
-	for i := 0; i < len(ar); i++ {
-		for j := i; j < len(ar); j++ {
-			if ar[i] > ar[j] {
-				swap(ar, uint32(i), uint32(j))
+func Solution(A []int) int {
+	var (
+		result int = 1 // переменная для вывода результата вычислений
+		count  int     // счетчик для поиска элемента
+	)
+
+	for i := 1; i <= len(A); i++ {
+		count = 0
+		fmt.Print("begin_val", i, " ")
+		for j := 0; j < len(A); j++ {
+			if A[j] == i { // если элемент есть, то смотрим следующий
+				count++
+				fmt.Println("end_val", i)
 			}
 		}
-	}
-}
-
-func swap(ar []uint32, i, j uint32) {
-	tmp := ar[i]
-	ar[i] = ar[j]
-	ar[j] = tmp
-}
-
-func Solution(A []uint32) uint32 {
-	var result uint32 = 1 // переменная для возвращения значения метода Solution
-	BubbleSort(A)         //сортировка пузырьком
-
-	for i := 0; i < len(A)-1; i++ { // проверка последовательности
-		if A[i] != uint32(i+1) { // если последовательность нарушена, то возвращаем 0
+		if count == 0 || count > 1 { // если элемента не было или он повторяется, то возвращаем значение 0
 			result = 0
 			return result
 		}
 	}
-	return result
+	return result // если не было изменений с result выше, то возвращаем значение 1
 }
 
 func main() {
-	var Enter_length uint32 // строка для хранения длины массива
-	var array []uint32      // массив чисел
+	var (
+		N     int   // длина массива и величина сдвига
+		array []int // исходный массив
+	)
 
-	fmt.Print("Введите длину массива диапазоне [1..100000]: ") // ввод длины массива
-	fmt.Scan(&Enter_length)
+	fmt.Print("Введите N в диапазоне [1..100000]: ") // ввод длины массива
+	fmt.Scan(&N)
 
-	if Enter_length != 0 { //проверяем "на дурака", если некорректно введена длина, завершаем программу
-		array = make([]uint32, Enter_length, 100000) // устанавливаем длину массива
-
-		for i := 0; i < len(array); i++ { // ввод массива с клавиатуры
-			fmt.Print("Введите " + strconv.Itoa(i) + " элемент: ")
-			fmt.Scan(&array[i])
-			if array[i] <= 0 {
-				fmt.Println("Некорректный ввод!") //если пользователь не умеет читать
-				os.Exit(0)
-			}
-		}
-
-		fmt.Println(Solution(array)) // вывод на экран является ли массив последовательностью
-
-	} else {
-		fmt.Println("Некорректный ввод!") //если пользователь не умеет читать
+	if N < 1 || N > 100000 { // проверка на корректный ввод
+		fmt.Print("Некорректный ввод!")
 		os.Exit(0)
 	}
+
+	array = make([]int, N, 100000) // инициализация массива
+
+	for i := 0; i < N; i++ { // ввод элементов массива
+		fmt.Print("Введите " + strconv.Itoa(i) + " элемент в диапазоне [1..1000000000]: ")
+		fmt.Scan(&array[i]) // ввод элементов массива
+
+		if array[i] < 1 || array[i] > 1000000000 { // проверка на корректный ввод
+			fmt.Print("Некорректный ввод!")
+			os.Exit(0)
+		}
+
+	}
+
+	fmt.Println(Solution(array))
 }
