@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func Solution(A []int, K int) []int {
+func Solution(A []int, K int) []int {	// метод для рокировки элементов
 	var temporary_val int           // переменная для хранения временного значения
 	for i := 0; i < K%len(A); i++ { // крутим внешний цикл на величину сдвига
 		temporary_val = A[len(A)-1]       // запоминаем послений элемент
@@ -55,7 +55,7 @@ func main() {
 
 	fmt.Println(array) // вывод старого массива
 
-	array = Solution(array, K)
+	array = Solution(array, K)	// рокируем массив
 
 	fmt.Println(array) // вывод нового массива
 }
